@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5433:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+  api:
+    container_name: film-api
+    build:
+      context: ./
+      target: development
+    image: film-api
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      NODE_ENV: development
+      DATABASE_HOST: db
+      DB_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: postgres
+      DATABASE_SYNC: 'true'
+      SECRET: asssssaawdasw
+    links:
+      - db
+    volumes:
+      - './:/src'
+volumes:
+  db:
+    driver: local
