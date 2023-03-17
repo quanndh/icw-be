@@ -14,11 +14,17 @@ async function bootstrap() {
               'http://localhost:3001',
               'http://localhost',
               'http://127.0.0.1:5173',
+              'http://thefilm.site',
             ],
             credentials: true,
           }
-        : true,
+        : {
+            origin: ['http://thefilm.site'],
+            credentials: true,
+          },
   });
+
+  app.setGlobalPrefix('/api');
 
   app.useGlobalFilters(new HttpExceptionFilter());
 
