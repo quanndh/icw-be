@@ -6,6 +6,7 @@ import { CommonModule } from 'src/modules/common/common.module';
 import { UserModule } from 'src/modules/users/user.module';
 import { AuthModule } from 'src/modules/auth/auth.module';
 import { UserFavoriteModule } from 'src/modules/user-favorites/user-favorite.module';
+import { AppController } from 'src/app.controller';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { UserFavoriteModule } from 'src/modules/user-favorites/user-favorite.mod
     UserModule,
     UserFavoriteModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
